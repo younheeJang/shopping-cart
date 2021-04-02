@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Shopping</title>
+        <title>Curious Jeager</title>
         <link rel="icon" href="/LOGO.ico" />
       </Head>
     </>
