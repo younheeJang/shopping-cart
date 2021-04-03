@@ -1,6 +1,16 @@
 import Head from 'next/head'
 
-export default function Shop() {
+export async function getStaticProps() {
+  
+    const items = await fetch('http://localhost:3001/api/shop/items').then((res) => res.json()).catch(err => console.log(err));
+  
+    return {
+      props: { items },
+    }
+  }
+  
+
+export default function Shop({items}) {
   return (
     <>
       <Head>
