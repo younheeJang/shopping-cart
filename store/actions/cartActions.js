@@ -7,6 +7,15 @@ export const plusCartItem = (counter) => {
     }
 }
 
+export const minusCartItem = (counter) => {
+    return {
+        type: 'MINUS_CART_ITEM',
+        payload:{
+            counter
+        }
+    }
+}
+
 export const addToCart = (product) => {
     console.log(product)
     return {

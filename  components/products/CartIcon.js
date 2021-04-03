@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { addToCart, plusCartItem } from '../../store/actions/cartActions'
+import { addToCart, plusCartItem, minusCartItem } from '../../store/actions/cartActions'
 import { useDispatch, useSelector  } from 'react-redux';
 
+
+//make minusCartItem and apply to component state 
+//when user click cart, items listed down.
+//set checkbox ui 
 const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {
     
     const [inCart, setInCart] = useState(false);
@@ -23,10 +27,17 @@ const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {
         dispatch(plusCartItem());
         setInCart(!inCart)
     }
+
+    const remove = (e) => {
+        e.preventDefault();
+
+        dispatch(minusCartItem());
+        setInCart(!inCart)
+    }
     return (
         <div >
         {!inCart &&  <img  onClick={add} className="h-5 w-5 cursor-pointer" alt="curious" src='/icons/shopping-add.png' />}
-        {inCart &&  <img  className="h-5 w-5 cursor-pointer" alt="curious" src='/icons/shopping-remove.png' />}
+        {inCart &&  <img  onClick={remove} className="h-5 w-5 cursor-pointer" alt="curious" src='/icons/shopping-remove.png' />}
         </div>
        
     )

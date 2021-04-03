@@ -16,6 +16,13 @@ const initialState = {
                   ...state,
                   counter: counter
               }
+
+          case 'MINUS_CART_ITEM':
+              counter--;
+              return{
+                  ...state,
+                  counter: counter
+              }
   
           case 'ADD_TO_CART':
   
