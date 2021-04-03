@@ -8,7 +8,7 @@ export async function getStaticProps() {
       props: { items },
     }
   }
-  
+   
 
 export default function Shop({items}) {
   return (
