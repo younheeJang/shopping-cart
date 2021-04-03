@@ -61,16 +61,17 @@ export default function Shop() {
         </nav>
       </div>
 
-      <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <div className="xl:mx-48 lg:mx-48 mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         
         {items &&  items.map(({ id, coverImage, title, price }) => (
-        <section key={id} className="text-gray-600 body-font">
-          <img className="xl:w-1/4 lg:w-1/3 md:w-1/2 w-2/3 block mx-auto mb-10 object-cover object-center rounded" alt="hero" src={coverImage} />
-          <div className="flex flex-col text-center w-full">
+        <section key={id} className="grid justify-items-stretch text-gray-600 body-font">
+          <div className="flex flex-col text-center w-full justify-self-center min-w-1/2">
+          <img className="xl:w-1/4 lg:w-1/3 md:w-1/2 w-2/3 mx-auto mb-10 rounded object-fill" alt="curious" src={coverImage} />
+          
             <p className="text-xl font-medium title-font mb-4 text-gray-900">{title}</p>
             <div className="grid grid-cols-12 ">
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base col-start-7 col-span-3">{price}</p>
-            <img className="h-5 w-5 " alt="hero" src='/icons/shopping-add.png' />
+            <img className="h-5 w-5 " alt="curious" src='/icons/shopping-add.png' />
             </div>
           </div>
           <div className="mb-10"></div>
