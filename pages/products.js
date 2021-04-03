@@ -1,22 +1,33 @@
 import Head from 'next/head'
+import useSWR, { mutate } from 'swr'
+import React,{ useState } from 'react'
 
-export async function getStaticProps() {
+
+const URL = `http://localhost:3001/api/shop/items`;
+
+
+export default function Shop() {
+
+  const [pageNumber, setPageNumber] = useState(1);
+  const fetcher = (...args) => fetch(...args).then(res => res.json())
+  const {data:items} = useSWR(pageNumber ? `${URL}/${pageNumber}`: null, fetcher)
   
-    const items = await fetch('http://localhost:3001/api/shop/items').then((res) => res.json()).catch(err => console.log(err));
-  
-    return {
-      props: { items },
+  console.log(items)
+    
+    async function getPageData(event) {
+        setPageNumber(event.target.value);
+        mutate(`${URL}/${pageNumber}`, false)  
     }
-  }
-   
+    
 
-export default function Shop({items}) {
+
   return (
     <>
       <Head>
         <title>Curious Jeager</title>
         <link rel="icon" href="/LOGO.ico" />
       </Head>
+
       <header className="'shadow-lg bg-white sticky top-0 h-50 text-gray-600 body-font">
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
           <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
@@ -26,6 +37,32 @@ export default function Shop({items}) {
           </nav>
         </div>
       </header>
+
+      <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+        <ul className="flex pl-0 rounded list-none flex-wrap">
+          <li>
+            <button value="1" onClick={getPageData} className="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-blueGray-500 bg-white text-blueGray-500">
+              1
+            </button>
+          </li>
+          <li>
+            <button value="2" onClick={getPageData} className="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-blueGray-500 bg-white text-blueGray-500">
+              2
+            </button>
+          </li>
+          <li>
+            <button value="3" onClick={getPageData} className="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-blueGray-500 bg-white text-blueGray-500">
+              3
+            </button>
+          </li>
+        </ul>
+        </nav>
+      </div>
+
+      <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        
+      </div>
     </>
     
    
