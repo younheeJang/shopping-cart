@@ -2,12 +2,13 @@ import Head from 'next/head'
 import useSWR, { mutate } from 'swr'
 import React,{ useState } from 'react'
 import CartIcon from '../ components/products/CartIcon'
+import { useSelector } from 'react-redux';
 
 const URL = `http://localhost:3001/api/shop/items`;
 
 
 export default function Shop() {
-
+  const counter = useSelector((state) => state.cartReducer.counter);
   const [pageNumber, setPageNumber] = useState(1);
   const fetcher = (...args) => fetch(...args).then(res => res.json())
   const {data:items} = useSWR(pageNumber ? `${URL}/${pageNumber}`: null, fetcher)
@@ -31,7 +32,7 @@ export default function Shop() {
           <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
               <a className="mr-5 hover:text-gray-900 cursor-pointer" href="/">Home</a>
               <a className="mr-5 text-gray-900 cursor-pointer" href="/products">Shop</a>
-              <a className="mr-5 hover:text-gray-900 cursor-pointer" href="/cart">Cart</a>
+              <a className="mr-5 hover:text-gray-900 cursor-pointer" href="/cart">Cart[{counter}]</a>
           </nav>
         </div>
       </header>
