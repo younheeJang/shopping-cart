@@ -1,3 +1,12 @@
+export const plusCartItem = (counter) => {
+    return {
+        type: 'PLUS_CART_ITEM',
+        payload:{
+            counter
+        }
+    }
+}
+
 export const addToCart = (product) => {
     console.log(product)
     return {

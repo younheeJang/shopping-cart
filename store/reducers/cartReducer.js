@@ -1,12 +1,21 @@
 const initialState = {
-    cart: []
+    cart: [],
+    counter: 0,
   };
   
   const cartReducer = (state = initialState, action) => {
   
       let cart = state.cart;
+      let counter = state.counter;
   
       switch(action.type) {
+
+          case 'PLUS_CART_ITEM':
+              counter++;
+              return {
+                  ...state,
+                  counter: counter
+              }
   
           case 'ADD_TO_CART':
   

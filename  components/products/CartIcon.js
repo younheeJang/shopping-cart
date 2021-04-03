@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {addToCart} from '../../store/actions/cartActions'
+import { addToCart, plusCartItem } from '../../store/actions/cartActions'
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {
-    const dispatch = useDispatch();
+    
     const [inCart, setInCart] = useState(false);
+    const dispatch = useDispatch();
+    const counter = useSelector((state) => state.cartReducer.counter);
+    console.log(counter)
     console.log(Id, CoverImage, Title, Price, AvailableCoupon)
+
     const add = (e) => {
         e.preventDefault();
+        if(counter === 3){
+            alert("U can save items til max 3!")
+            return
+        }
+        
         if(typeof AvailableCoupon!=='undefined')  dispatch(addToCart({id: Id, coverImage: CoverImage, title: Title, price:Price, availableCoupon:AvailableCoupon}))
         else if(typeof AvailableCoupon === 'undefined')  dispatch(addToCart({id: Id, coverImage: CoverImage, title: Title, price:Price}))
+        dispatch(plusCartItem());
         setInCart(!inCart)
     }
     return (
