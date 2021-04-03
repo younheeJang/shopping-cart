@@ -27,22 +27,22 @@ export const addToCart = (product) => {
     }
 };
 
-export const removeFromCart = (productId) => {
+export const removeFromCart = (id) => {
 
     return {
         type: 'REMOVE_FROM_CART',
         payload: {
-            productId: productId
+            id: id
         }
     }
 };
 
-export const updateCartQuantity = (productId, quantity) => {
+export const updateCartQuantity = (id, quantity) => {
 
   return {
       type: 'UPDATE_CART_QUANTITY',
       payload: {
-          productId,
+          id,
           quantity: quantity
       }
   }

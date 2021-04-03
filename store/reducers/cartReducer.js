@@ -34,9 +34,9 @@ const initialState = {
               };
           case 'UPDATE_CART_QUANTITY':
   
-              let item = cart.find(item => item.product.id == action.payload.productId);
+              let item = cart.find(item => item.product.id == action.payload.id);
   
-              let newCart = cart.filter(item => item.product.id != action.payload.productId);
+              let newCart = cart.filter(item => item.product.id != action.payload.id);
   
               item.quantity = action.payload.quantity;
   
@@ -50,7 +50,7 @@ const initialState = {
           case 'REMOVE_FROM_CART':
               return {
                   ...state,
-                  cart: cart.filter(item => item.product.id != action.payload.productId)
+                  cart: cart.filter(item => item.product.id != action.payload.id)
               };
           default:
               return state;

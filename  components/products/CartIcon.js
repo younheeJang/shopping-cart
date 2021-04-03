@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { addToCart, plusCartItem, minusCartItem } from '../../store/actions/cartActions'
+import { addToCart, plusCartItem, minusCartItem, removeFromCart } from '../../store/actions/cartActions'
 import { useDispatch, useSelector  } from 'react-redux';
 
 
@@ -30,7 +30,7 @@ const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {
 
     const remove = (e) => {
         e.preventDefault();
-
+        dispatch(removeFromCart(Id))
         dispatch(minusCartItem());
         setInCart(!inCart)
     }
