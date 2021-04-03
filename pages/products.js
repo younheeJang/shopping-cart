@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import useSWR, { mutate } from 'swr'
 import React,{ useState } from 'react'
-
+import PresentCartIcon from '../ components/cart/PresentCartIcon'
 
 const URL = `http://localhost:3001/api/shop/items`;
 
@@ -11,8 +11,6 @@ export default function Shop() {
   const [pageNumber, setPageNumber] = useState(1);
   const fetcher = (...args) => fetch(...args).then(res => res.json())
   const {data:items} = useSWR(pageNumber ? `${URL}/${pageNumber}`: null, fetcher)
-  
-  console.log(items)
     
     async function getPageData(event) {
         await setPageNumber(event.target.value);
@@ -71,7 +69,7 @@ export default function Shop() {
             <p className="text-xl font-medium title-font mb-4 text-gray-900">{title}</p>
             <div className="grid grid-cols-12 ">
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base col-start-7 col-span-3">{price}</p>
-            <img className="h-5 w-5 " alt="curious" src='/icons/shopping-add.png' />
+            <PresentCartIcon/>
             </div>
           </div>
           <div className="mb-10"></div>
