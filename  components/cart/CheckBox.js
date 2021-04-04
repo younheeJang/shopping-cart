@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector  } from 'react-redux';
 import { justAdd } from '../../lib/pricing';
+import { addPricingInfo, removePricingInfo } from '../../store/actions/cartActions';
 
 const CheckBox= ({Id, Price, AvailableCoupon}) => {
     
@@ -10,14 +11,20 @@ const CheckBox= ({Id, Price, AvailableCoupon}) => {
     let [quantity, setQuantity] = useState(1)
     let [itemPrice, setItemPrice] = useState(Price)
 
-    const getPriceFromCheckedItem = (e) => {
+    const dispatch = useDispatch();
+
+    const getPriceFromCheckedItem = async(e) => {
     
         const { target: { checked } } = e;
-        setChecked({ checked });
-
-        if(isChecked){
+        await setChecked(checked);
+        await console.log(isChecked)
+        if(isChecked === false){
             itemPrice = quantity * Price
             setItemPrice(itemPrice)
+            dispatch(addPricingInfo({id: Id, price: itemPrice, availableCoupon: AvailableCoupon}))
+        }
+        else if(isChecked === true){
+            dispatch(removePricingInfo(Id))
         }
      
     }

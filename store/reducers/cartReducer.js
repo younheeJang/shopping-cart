@@ -3,12 +3,14 @@ import { HYDRATE } from 'next-redux-wrapper';
 const initialState = {
     cart: [],
     counter: 0,
+    pricingInfos:[]
   };
   
   const cartReducer = (state = initialState, action) => {
   
       let cart = state.cart;
       let counter = state.counter;
+      let pricingInfos = state.pricingInfos;
   
       switch(action.type) {
         case HYDRATE:
@@ -42,6 +44,17 @@ const initialState = {
                   ...state,
                   cart: cart.filter(item => item.product.id != action.payload.id)
               };
+          case 'ADD_PRICING_INFO':
+                pricingInfos.push(action.payload);
+              return{
+                  ...state,
+                  pricingInfos: pricingInfos
+              }
+          case 'REMOVE_PRICING_INFO':
+              return{
+                  ...state,
+                  pricingInfos: pricingInfos.filter(item => item.pricingInfo.id != action.payload.id)
+              }
           default:
               return state;
       }
