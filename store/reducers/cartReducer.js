@@ -36,20 +36,6 @@ const initialState = {
                   ...state,
                   cart: cart
               };
-          case 'UPDATE_CART_QUANTITY':
-  
-              let item = cart.find(item => item.product.id == action.payload.id);
-  
-              let newCart = cart.filter(item => item.product.id != action.payload.id);
-  
-              item.quantity = action.payload.quantity;
-  
-              newCart.push(item);
-  
-              return {
-                  ...state,
-                  cart: newCart
-              };
   
           case 'REMOVE_FROM_CART':
               return {

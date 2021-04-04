@@ -1,4 +1,4 @@
-import { HYDRATE } from "next-redux-wrapper";
+
 
 export const plusCartItem = (counter) => {
     return {
@@ -25,7 +25,6 @@ export const addToCart = (product) => {
         type: 'ADD_TO_CART',
         payload: {
             product,
-            quantity: 1
         }
     }
 };
@@ -38,15 +37,4 @@ export const removeFromCart = (id) => {
             id: id
         }
     }
-};
-
-export const updateCartQuantity = (id, quantity) => {
-
-  return {
-      type: 'UPDATE_CART_QUANTITY',
-      payload: {
-          id,
-          quantity: quantity
-      }
-  }
 };
