@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { addToCart, plusCartItem, minusCartItem, removeFromCart } from '../../store/actions/cartActions'
+import { addToCart, plusCartItem, minusCartItem, removeFromCart} from '../../store/actions/cartActions'
 import { useDispatch, useSelector  } from 'react-redux';
 
 
-//make minusCartItem and apply to component state 
-//when user click cart, items listed down.
-//set checkbox ui 
 const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {
     
     const [inCart, setInCart] = useState(false);
     const dispatch = useDispatch();
     const counter = useSelector((state) => state.cartReducer.counter);
-    console.log(counter)
-    console.log(Id, CoverImage, Title, Price, AvailableCoupon)
-
+    
+    
     const add = (e) => {
         e.preventDefault();
         if(counter === 3){

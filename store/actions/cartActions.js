@@ -1,3 +1,5 @@
+import { HYDRATE } from "next-redux-wrapper";
+
 export const plusCartItem = (counter) => {
     return {
         type: 'PLUS_CART_ITEM',
@@ -10,11 +12,12 @@ export const plusCartItem = (counter) => {
 export const minusCartItem = (counter) => {
     return {
         type: 'MINUS_CART_ITEM',
-        payload:{
+        payload: {
             counter
         }
     }
 }
+
 
 export const addToCart = (product) => {
     console.log(product)

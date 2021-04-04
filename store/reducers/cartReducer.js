@@ -1,3 +1,5 @@
+import { HYDRATE } from 'next-redux-wrapper';
+
 const initialState = {
     cart: [],
     counter: 0,
@@ -9,7 +11,9 @@ const initialState = {
       let counter = state.counter;
   
       switch(action.type) {
-
+        case HYDRATE:
+                // Attention! This will overwrite client state! Real apps should use proper reconciliation.
+                return {...state};
           case 'PLUS_CART_ITEM':
               counter++;
               return {
