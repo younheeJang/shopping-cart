@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { addToCart, plusCartItem, minusCartItem, removeFromCart} from '../../store/actions/cartActions'
 import { useDispatch, useSelector  } from 'react-redux';
+import { addToCart, plusCartItem, minusCartItem, removeFromCart} from '../../store/actions/cartActions'
+
 
 
 const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {

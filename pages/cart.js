@@ -6,8 +6,7 @@ import Pricing from '../ components/pricing/Pricing'
 
 export default function Cart() {
   const items = useSelector((state) => state.cartReducer.cart);
-  //const pricingInfos = useSelector((state) => state.cartReducer.pricingInfos);
-  //console.log(pricingInfos)
+ 
   return (
     <>
       <Head>
