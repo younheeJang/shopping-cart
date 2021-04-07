@@ -1,7 +1,6 @@
-import { useDispatch, useSelector  } from 'react-redux';
+import {  useSelector  } from 'react-redux';
 import { justAdd } from '../../lib/pricing';
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 const Pricing = () => {
 

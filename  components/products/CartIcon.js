@@ -22,14 +22,12 @@ const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {
         if(typeof AvailableCoupon!=='undefined')  dispatch(addToCart({id: Id, coverImage: CoverImage, title: Title, price:Price, availableCoupon:AvailableCoupon, quantity: 1}))
         else if(typeof AvailableCoupon === 'undefined')  dispatch(addToCart({id: Id, coverImage: CoverImage, title: Title, price:Price, quantity:1}))
         dispatch(plusCartItem());
-        console.log(cart)
         setInCart(!inCart)
     }
 
     const remove = (e) => {
         e.preventDefault();
         dispatch(removeFromCart(Id))
-        console.log(cart)
         dispatch(minusCartItem());
         setInCart(!inCart)
     }

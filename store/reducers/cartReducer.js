@@ -56,12 +56,7 @@ const initialState = {
                   ...state,
                   pricingInfos:  pricingInfos.filter(item => item.pricingInfo.id != action.payload.id)
               }
-          case 'GET_PRICING_INFOS':
-             
-              return{
-                  ...state,
-                  pricingInfos: pricingInfos
-              }
+              
           default:
               return state;
       

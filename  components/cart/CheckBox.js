@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { addPricingInfo, removePricingInfo } from '../../store/actions/cartActions';
+import { addPricingInfo, removePricingInfo } from '../../store/actions/pricingActions'; 
 
 const CheckBox= ({Id, Price, AvailableCoupon}) => {
 

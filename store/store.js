@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
 import cartReducer from './reducers/cartReducer'
-//import editorDataReducer from '../reducers/editorDataReducer'
+import pricingReducer from './reducers/pricingReducer'
 
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -15,18 +15,18 @@ const bindMiddleware = (middleware) => {
 
 const combinedReducer = combineReducers({
   cartReducer,
-  //editorDataReducer
+  pricingReducer
 })
 
 const reducer = (state, action) => {
-    console.log(action.type)
+  
    if (action.type === HYDRATE) {
     const nextState = {
       ...state, // use previous state
       ...action.payload, // apply delta from hydration
     }
     if (state.cartReducer.cartReducer) nextState.cartReducer.cartReducer = state.cartReducer.cartReducer
-    //if (state.editorDataReducer.editorDataReducer) nextState.editorDataReducer.editorDataReducer = state.editorDataReducer.editorDataReducer
+    if (state.pricingReducer.pricingReducer) nextState.pricingReducer.pricingReducer = state.pricingReducer.pricingReducer
     // preserve count value on client side navigation
     return nextState
   } else {
@@ -37,8 +37,5 @@ const reducer = (state, action) => {
 const initStore = () => {
   return createStore(reducer, bindMiddleware([thunkMiddleware]))
 }
-//const makeStore= (context) => createStore(reducer,bindMiddleware([thunkMiddleware]));
-
-//export const wrapper = createWrapper(makeStore, {debug: false});
 
 export const wrapper = createWrapper(initStore)
