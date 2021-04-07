@@ -20,6 +20,7 @@ export const minusCartItem = (counter) => {
 
 
 export const addToCart = (product) => {
+    
     return {
         type: 'ADD_TO_CART',
         payload: {
@@ -53,5 +54,11 @@ export const removePricingInfo = (id) => {
         payload:{
             id:id
         }
+    }
+}
+
+export const getPricingInfos = () => {
+    return {
+        type: 'GET_PRICING_INFOS',
     }
 }

@@ -6,12 +6,12 @@ const initialState = {
     pricingInfos:[]
   };
   
-  const cartReducer = (state = initialState, action) => {
+  const cartReducer = (state = initialState, action)  => {
   
       let cart = state.cart;
       let counter = state.counter;
       let pricingInfos = state.pricingInfos;
-  
+   
       switch(action.type) {
         case HYDRATE:
                 // Attention! This will overwrite client state! Real apps should use proper reconciliation.
@@ -45,19 +45,27 @@ const initialState = {
                   cart: cart.filter(item => item.product.id != action.payload.id)
               };
           case 'ADD_PRICING_INFO':
-                pricingInfos.push(action.payload);
+                
+              return{
+                  ...state,
+                  pricingInfos: pricingInfos.concat(action.payload)
+              }
+          case 'REMOVE_PRICING_INFO':
+                
+              return{
+                  ...state,
+                  pricingInfos:  pricingInfos.filter(item => item.pricingInfo.id != action.payload.id)
+              }
+          case 'GET_PRICING_INFOS':
+             
               return{
                   ...state,
                   pricingInfos: pricingInfos
               }
-          case 'REMOVE_PRICING_INFO':
-              return{
-                  ...state,
-                  pricingInfos: pricingInfos.filter(item => item.pricingInfo.id != action.payload.id)
-              }
           default:
               return state;
-      }
+      
+        }
   };
   
   export default cartReducer;
