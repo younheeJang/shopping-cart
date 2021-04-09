@@ -39,3 +39,20 @@ export const removeFromCart = (id) => {
     }
 };
 
+export const addIdToInCart = (id) => {
+    return {
+        type: 'ADD_ID_TO_INCART',
+        payload: {
+            id
+        }
+    }
+};
+
+export const removeIdFromInCart = (id) => {
+    return {
+        type: 'REMOVE_ID_FROM_INCART',
+        payload: {
+            id
+        }
+    }
+};

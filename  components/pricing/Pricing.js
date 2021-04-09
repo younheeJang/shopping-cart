@@ -2,15 +2,14 @@ import {  useSelector  } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { justAdd, getPricingResult } from '../../lib/pricing';
-//import {getPricingResult} from '../../lib/pricing';
 
 const Pricing = ({Coupons}) => {
 
     const pricingInfos = useSelector((state) => state.cartReducer.pricingInfos);
-    console.log(pricingInfos)
+    
     let [totalPrice, setTotalPrice] = useState(0); 
     useEffect(() => {
-        // 브라우저 API를 이용하여 문서 타이틀을 업데이트합니다.
+       
         if(pricingInfos.length > 0) setTotalPrice(justAdd(pricingInfos))
         if(pricingInfos.length ===0) setTotalPrice(0)
     }, [pricingInfos])
@@ -28,9 +27,7 @@ const Pricing = ({Coupons}) => {
             let coupon = {type:type, discountAmount: amount}
             let result = getPricingResult(pricingInfos, coupon)
             setTotalPrice(result)
-        }
-     
-    
+        }  
     }
     
     return(

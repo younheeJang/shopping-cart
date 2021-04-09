@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector  } from 'react-redux';
-import { addToCart, plusCartItem, minusCartItem, removeFromCart} from '../../store/actions/cartActions'
+import { addToCart, plusCartItem, minusCartItem, removeFromCart, addIdToInCart, removeIdFromInCart } from '../../store/actions/cartActions'
 
 
 
-const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {
+const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon, IdInCart}) => {
     
     const [inCart, setInCart] = useState(false);
     const dispatch = useDispatch();
     const counter = useSelector((state) => state.cartReducer.counter);
-    const cart = useSelector((state) => state.cartReducer.cart);
-    
-    
+    const same = (id) =>  id === Id;
+
+    useEffect(() => {
+        
+        if(IdInCart.length > 0) setInCart(IdInCart.some(same))
+        if(IdInCart.length ===0) setInCart(false)
+    }, [IdInCart])
+   
     const add = (e) => {
         e.preventDefault();
         if(counter === 3){
@@ -22,7 +27,8 @@ const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {
         
         if(typeof AvailableCoupon!=='undefined')  dispatch(addToCart({id: Id, coverImage: CoverImage, title: Title, price:Price, availableCoupon:AvailableCoupon, quantity: 1}))
         else if(typeof AvailableCoupon === 'undefined')  dispatch(addToCart({id: Id, coverImage: CoverImage, title: Title, price:Price, quantity:1}))
-        dispatch(plusCartItem());
+        dispatch(plusCartItem()); 
+        dispatch(addIdToInCart(Id))
         setInCart(!inCart)
     }
 
@@ -30,6 +36,7 @@ const CartIcon = ({Id, CoverImage, Title, Price, AvailableCoupon}) => {
         e.preventDefault();
         dispatch(removeFromCart(Id))
         dispatch(minusCartItem());
+        dispatch(removeIdFromInCart(Id))
         setInCart(!inCart)
     }
     return (
@@ -46,6 +53,7 @@ CartIcon.propTypes ={
     CoverImage: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
     Price: PropTypes.number.isRequired,
-    AvailableCoupon: PropTypes.bool
+    AvailableCoupon: PropTypes.bool,
+    idInCart: PropTypes.array
 }
 export default CartIcon;

@@ -3,6 +3,7 @@ import useSWR, { mutate } from 'swr'
 import React,{ useState } from 'react'
 import CartIcon from '../ components/products/CartIcon'
 import Header from '../ components/utils/Header';
+import { useSelector  } from 'react-redux';
 
 const URL = `http://localhost:3001/api/shop/items`;
 
@@ -12,7 +13,8 @@ export default function Shop() {
   const [pageNumber, setPageNumber] = useState(1);
   const fetcher = (...args) => fetch(...args).then(res => res.json())
   const {data:items} = useSWR(pageNumber ? `${URL}/${pageNumber}`: null, fetcher)
-    
+  const idIncart = useSelector((state) => state.cartReducer.idInCart);
+  
     async function getPageData(event) {
         await setPageNumber(event.target.value);
         await mutate(`${URL}/${pageNumber}`, false)  
@@ -61,7 +63,7 @@ export default function Shop() {
             <p className="text-xl font-medium title-font mb-4 text-gray-900">{title}</p>
             <div className="grid grid-cols-12 ">
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base col-start-7 col-span-3">{price}</p>
-            <CartIcon Id={id} CoverImage={coverImage} Title={title} Price={price} AvailableCoupon={availableCoupon}/>
+            <CartIcon Id={id} CoverImage={coverImage} Title={title} Price={price} AvailableCoupon={availableCoupon} IdInCart={idIncart}/>
             </div>
           </div>
           <div className="mb-10"></div>

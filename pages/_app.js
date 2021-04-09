@@ -3,7 +3,7 @@ import { wrapper } from '../store/store'
 
 
 const WrappedApp = ({ Component, pageProps, store }) => {
-    console.log(store)
+    
   return <Component {...pageProps} />
 }
 
